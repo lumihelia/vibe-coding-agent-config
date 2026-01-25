@@ -1,103 +1,108 @@
-# Vibe Coding 配置文件指南
+# Vibe Coding Agent 配置指南
 
-> 讓 AI Agent 更聰明地幫你寫代碼
-
----
-
-## 30 秒理解
-
-這些文件是給 AI Agent（如 Claude、Gemini）的「工作說明書」。它們告訴 Agent：
-
-- 你是什麼角色
-- 你應該怎麼寫代碼
-- 遇到問題時怎麼處理
-
-**結果**：Agent 產出更高品質的代碼，減少你的維護成本。
+> 讓 AI 幫你寫程式的「說明書」
 
 ---
 
-## 快速開始（5 分鐘）
+## 這是什麼？
 
-### Step 1: 複製文件到你的項目
+當你用 AI 工具（如 Claude、Cursor、Copilot）寫程式時，AI 有時候會：
+
+- 問太多問題
+- 寫的程式碼風格不統一
+- 解釋太多你不需要的東西
+- 出錯時不知道怎麼辦
+
+**這套配置文件就是用來解決這些問題的。**
+
+把這些文件放到你的專案裡，AI 就會按照你的規則來工作。
+
+---
+
+## 快速開始
+
+### 方法一：用命令行（推薦）
 
 ```bash
-# 在你的項目根目錄創建 .agent 資料夾
-mkdir -p .agent
-
-# 複製這些文件到 .agent 資料夾
-cp AGENT.md SKILLS.md CODE_STANDARDS.md UI_STYLES.md .agent/
+npx vibe-coding-config init
 ```
 
-### Step 2: 告訴 Agent 讀取這些文件
+### 方法二：手動複製
 
-在與 Agent 對話時，加入這句：
-
-```
-請先閱讀 .agent/ 資料夾中的配置文件，然後再開始工作。
-```
-
-### Step 3: 開始使用
-
-正常與 Agent 對話即可。它會自動遵循你的規則。
+1. 下載這個資料夾
+2. 在你的專案裡建立 `.agent` 資料夾
+3. 把所有 `.md` 文件複製進去
+4. 告訴 AI：「請先閱讀 .agent 資料夾裡的配置」
 
 ---
 
-## 文件結構說明
+## 文件說明
 
-| 文件 | 給誰看 | 作用 |
-|------|--------|------|
-| **README.md** | 人類 | 說明這些文件怎麼用（你正在讀的這個） |
-| **AGENT.md** | AI Agent | 核心系統指令：角色定義、執行規則、Token 效率 |
-| **SKILLS.md** | AI Agent | 具體技能：錯誤處理流程、代碼生成模板 |
-| **CODE_STANDARDS.md** | AI Agent | 代碼規範：命名、結構、註釋標準 |
-| **EXAMPLES.md** | 人類 + AI | 使用示例：典型場景下 Agent 應該怎麼做 |
-| **UI_STYLES.md** | AI Agent | 設計系統：顏色、字體、組件樣式（可自定義） |
+| 文件 | 用途 | 什麼時候需要看 |
+|------|------|---------------|
+| **AGENT.md** | AI 的「工作手冊」 | 不需要看，AI 自己會讀 |
+| **CODE_STANDARDS.md** | 程式碼規範 | 想改命名規則時 |
+| **SKILLS.md** | AI 的技能清單 | 好奇 AI 能做什麼時 |
+| **EXAMPLES.md** | 使用範例 | 想看 AI 應該怎麼回應時 |
+| **UI_STYLES.md** | 介面設計風格 | 做前端專案時 |
+| **GIT_WORKFLOW.md** | Git 使用規則 | 需要版本控制時 |
 
 ---
 
-## 你會獲得什麼
+## 支援哪些 AI 工具？
 
-| 目標 | 對應文件 | 效果 |
-|------|---------|------|
-| 更可維護的代碼 | CODE_STANDARDS.md | Agent 遵循一致的命名、結構、註釋標準 |
-| 自動修復錯誤 | AGENT.md + SKILLS.md | 遇錯時自動診斷和修復，不需你手動指出 |
-| 節省 Token | AGENT.md | 簡潔輸出，不浪費在重複解釋上 |
-| 自主解決問題 | AGENT.md | 只在真正需要時才問你 |
+基本上，主流的 AI 程式設計工具都能用：
+
+| 工具 | 公司 |
+|------|------|
+| Claude Code | Anthropic |
+| Cursor | Anysphere |
+| Windsurf | Codeium |
+| GitHub Copilot | Microsoft |
+| Gemini CLI | Google |
+
+用 `export` 命令可以轉換成不同工具的格式：
+
+```bash
+npx vibe-coding-config export --target cursor
+npx vibe-coding-config export --target copilot
+```
 
 ---
 
 ## 常見問題
 
-### Q: 這些文件適用於哪些 AI Agent？
+### Q: 我完全不懂程式，能用嗎？
 
-適用於所有支持系統指令的 Agent，包括：
+可以。這套配置就是為非技術背景的人設計的。你只需要把文件複製到專案裡，AI 會自己讀懂。
 
-| 產品 | 公司 | 指令文件格式 |
-|------|------|-------------|
-| Claude Code | Anthropic | CLAUDE.md |
-| Cursor | Anysphere | .cursorrules |
-| Windsurf | Codeium | 自定義規則 |
-| Gemini CLI / Antigravity | Google | GEMINI.md |
-| Jules | Google | 自定義規則 |
-| GitHub Copilot | GitHub/Microsoft | .github/copilot-instructions.md |
+### Q: 我用的是 Cursor / Copilot，能用嗎？
 
-> 💡 本套件提供通用指令，適用於所有平台。只需複製內容到對應工具的文件格式即可。
+可以。使用 `npx vibe-coding-config export --target cursor` 命令可以轉換成對應格式。
 
-### Q: 我可以修改這些文件嗎？
+### Q: 我想改一些規則怎麼辦？
 
-當然！這些只是起點。根據你的需求調整規則。
+直接編輯 `.md` 文件就行。這些都是普通的文字檔案，用任何編輯器都能打開。
 
-### Q: 如果 Agent 沒有遵循規則怎麼辦？
+### Q: AI 不按規則來怎麼辦？
 
-1. 確保你在對話開始時提醒 Agent 讀取文件
-2. 對於重要規則，可以在對話中再次強調
-3. 考慮縮短文件長度，只保留最關鍵的規則
+在對話開頭提醒它：「請先閱讀 .agent 資料夾裡的配置文件，然後按照配置來工作。」
+
+### Q: 看完還是不懂怎麼操作？
+
+沒關係！直接把這個 GitHub 倉庫的連結發給你正在用的 AI（Claude、ChatGPT、Gemini 都行），然後說：
+
+> 「我想用這套配置來幫助你更好地幫我寫程式，請一步一步指導我怎麼設置。」
+
+AI 會手把手教你操作的。
 
 ---
 
-## 下一步
+## 需要幫助？
 
-1. 閱讀 [AGENT.md](./AGENT.md) 了解核心規則
-2. 閱讀 [EXAMPLES.md](./EXAMPLES.md) 看實際使用場景
-3. 根據需要調整 [CODE_STANDARDS.md](./CODE_STANDARDS.md)
-4. 自定義 [UI_STYLES.md](./UI_STYLES.md) 的設計風格
+- 有問題或建議：[GitHub Issues](https://github.com/lumihelia/vibe-coding-agent-config/issues)
+- 想貢獻程式碼：歡迎 PR
+
+---
+
+MIT License

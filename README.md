@@ -1,118 +1,149 @@
 # Vibe Coding Agent Config Kit
 
-> 🌏 中文版 | 🌍 English Version
->
-> **The Complete AI Agent Configuration Kit for Beginners**
->
-> 專為非技術背景的中文用戶設計，提供可直接使用的完整配置體系。
+**让 AI 更懂你的「说明书」**
 
 ---
 
-## What Makes This Different?
+## 你不需要懂代码
 
-| Existing Projects | This Kit |
-|-------------------|----------|
-| English only | **Bilingual** (繁體中文 / English) |
-| Assumes technical background | **Beginner-friendly** with explanations |
-| Single rule file | **Complete system** (6 integrated files) |
-| Abstract rules | **Real examples** showing do's and don'ts |
-| No token awareness | **Token efficiency** rules included |
+这套工具是给「用 AI 写代码的人」准备的。
 
----
+不管你是：
 
-## Choose Your Language
+- 第一次用 AI 写程序的创业者
+- 想让 AI 帮忙做项目的设计师
+- 只是好奇想试试的普通人
 
-| Language | Folder | Quick Start |
-|----------|--------|-------------|
-| **繁體中文** | [zh/](./zh/) | [開始使用 →](./zh/README.md) |
-| **English** | [en/](./en/) | [Get Started →](./en/README.md) |
+**你都可以用。**
 
 ---
 
-## What's Included?
+## 它能帮你解决什么？
 
-```
-docs/
-├── README.md              # You're here
-├── zh/                    # 繁體中文版
-│   ├── README.md          # 使用指南
-│   ├── AGENT.md           # Agent 系統指令
-│   ├── SKILLS.md          # 技能手冊
-│   ├── CODE_STANDARDS.md  # 程式碼規範
-│   ├── EXAMPLES.md        # 使用範例
-│   └── UI_STYLES.md       # UI 設計風格
-└── en/                    # English Version
-    └── (same structure)
-```
+用 AI 写代码时，你可能遇到过这些问题：
+
+| 问题 | 用了这套配置后 |
+|------|---------------|
+| AI 问太多问题，很烦 | AI 会自己判断，小问题自己解决 |
+| AI 写的代码乱七八糟 | AI 会按照统一的规范写代码 |
+| AI 解释一大堆看不懂 | AI 会简洁回答，不啰嗦 |
+| 每次都要重新教 AI | 配置文件帮你记住所有规则 |
 
 ---
 
-## Who Is This For?
+## 选择你的语言
 
-- 🎯 **Non-technical founders** learning to vibe code
-- 🎯 **Beginners** using Claude, Gemini, Cursor, or Copilot
-- 🎯 **Chinese-speaking developers** who prefer native language docs
-- 🎯 **Anyone** who wants their AI agent to write better code
-
----
-
-## What Problems Does It Solve?
-
-| Problem | Solution |
-|---------|----------|
-| Agent writes messy code | → CODE_STANDARDS.md with naming/structure rules |
-| Agent asks too many questions | → AGENT.md with auto-fix scope |
-| Agent wastes tokens on explanations | → Token efficiency rules |
-| Agent doesn't know when to stop | → Escalation threshold |
-| Every project reinvents the wheel | → Reusable template files |
+| 语言 | 说明 | 开始使用 |
+|------|------|---------|
+| **简体中文** | 为大陆用户优化 | [开始使用 →](./zh-CN/README.md) |
+| **繁體中文** | 為台港澳用戶設計 | [開始使用 →](./zh/README.md) |
+| **English** | For English speakers | [Get Started →](./en/README.md) |
 
 ---
 
-## Quick Start
+## 怎么用？
+
+### 方法一：一条命令搞定（推荐）
+
+打开终端（Terminal），输入：
 
 ```bash
-# 1. Clone or download
-git clone https://github.com/YOUR_USERNAME/vibe-coding-agent-config.git
+npx vibe-coding-config init
+```
 
-# 2. Copy to your project
-mkdir -p .agent
-cp -r zh/*.md .agent/   # or en/*.md for English
+就这样，配置文件会自动复制到你的项目里。
 
-# 3. Tell your AI agent
-"Please read .agent/ folder first before starting work."
+**其他语言版本：**
+
+```bash
+npx vibe-coding-config init --lang en      # English
+npx vibe-coding-config init --lang zh-CN   # 简体中文
+```
+
+### 方法二：手动下载
+
+1. 点击页面上的绿色「Code」按钮
+2. 选择「Download ZIP」
+3. 解压后，把对应语言文件夹里的文件复制到你的项目
+
+---
+
+## 支持哪些 AI 工具？
+
+基本上，主流的 AI 编程工具都能用：
+
+| 工具 | 公司 |
+|------|------|
+| Claude Code | Anthropic |
+| Cursor | Anysphere |
+| Windsurf | Codeium |
+| GitHub Copilot | Microsoft |
+| Gemini CLI | Google |
+
+用 `export` 命令可以转换成不同工具的格式：
+
+```bash
+npx vibe-coding-config export --target cursor
+npx vibe-coding-config export --target copilot
 ```
 
 ---
 
-## Compatibility
+## 里面有什么？
 
-Works with any AI coding assistant that supports system instructions:
+```
+zh-CN/（或 zh/ 或 en/）
+├── AGENT.md           # AI 的工作手册（你不用看）
+├── CODE_STANDARDS.md  # 代码规范
+├── SKILLS.md          # AI 能做什么
+├── EXAMPLES.md        # 使用示例
+├── UI_STYLES.md       # 界面设计风格
+└── GIT_WORKFLOW.md    # 版本控制规则
+```
 
-| Product | Company | Instruction File Format |
-|---------|---------|------------------------|
-| **Claude Code** | Anthropic | CLAUDE.md |
-| **Cursor** | Anysphere | .cursorrules |
-| **Windsurf** | Codeium | Supports custom rules |
-| **Gemini CLI / Antigravity** | Google | GEMINI.md |
-| **Jules** | Google | Supports custom rules |
-| **GitHub Copilot** | GitHub/Microsoft | .github/copilot-instructions.md |
+**你需要看哪个？**
 
-> 💡 This kit provides universal instructions that work across all platforms. Just copy the content to the appropriate file format for your tool.
-
----
-
-## Contributing
-
-Found a bug? Have a suggestion? PRs welcome!
+- 大部分情况下：**都不用看**，AI 会自己读
+- 想改规则：看 `CODE_STANDARDS.md`
+- 做前端项目：看 `UI_STYLES.md`
+- 好奇 AI 能做什么：看 `SKILLS.md`
 
 ---
 
-## License
+## 常见问题
 
-MIT - Feel free to use, modify, and share.
+**Q: 我完全不懂代码，真的能用吗？**
+
+能。把文件放到项目里，告诉 AI「请先读 .agent 文件夹」，就可以了。
+
+**Q: 免费吗？**
+
+完全免费，MIT 开源协议。
+
+**Q: 遇到问题怎么办？**
+
+[提一个 Issue](https://github.com/lumihelia/vibe-coding-agent-config/issues)，我会尽量帮忙。
+
+**Q: 看完还是不懂怎么办？**
+
+没关系！直接把这个仓库的链接发给你正在用的 AI（Claude、ChatGPT、Gemini 都行），然后说：
+
+> 「我想用这套配置来帮助你更好地帮我写代码，请一步一步指导我怎么设置。」
+
+AI 会手把手教你操作的。
 
 ---
 
-## Author
+## 关于这个项目
 
-Made with 💜 for the Vibe Coding community.
+这套配置是为「非技术背景但想用 AI 写代码的人」设计的。
+
+我自己是从几乎不太懂代码开始的。第一次看到满屏幕的技术文档时（给 Claude Code 配置终端），那种「两眼发黑崩溃到想哭」的感觉…我懂。
+
+所以我想做一套真正对新手友好的东西。
+
+希望它能帮到你。
+
+---
+
+MIT License | Made by [lumihelia](https://github.com/lumihelia)

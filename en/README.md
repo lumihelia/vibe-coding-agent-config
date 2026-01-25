@@ -1,103 +1,108 @@
-# Vibe Coding Configuration Guide
+# Vibe Coding Agent Config Guide
 
-> Make your AI Agent smarter at writing code
-
----
-
-## 30-Second Overview
-
-These files are "work instructions" for AI Agents (Claude, Gemini, etc.). They tell the Agent:
-
-- What role you should play
-- How you should write code
-- How to handle problems when they arise
-
-**Result**: Higher quality code output, less maintenance work for you.
+> Instructions to help AI write better code for you
 
 ---
 
-## Quick Start (5 Minutes)
+## What is this?
 
-### Step 1: Copy files to your project
+When you use AI tools (like Claude, Cursor, Copilot) to write code, AI sometimes:
+
+- Asks too many questions
+- Writes inconsistent code
+- Over-explains things you don't need
+- Doesn't know how to recover from errors
+
+**This config kit solves these problems.**
+
+Put these files in your project, and AI will follow your rules.
+
+---
+
+## Quick Start
+
+### Option 1: One Command (Recommended)
 
 ```bash
-# Create .agent folder in your project root
-mkdir -p .agent
-
-# Copy these files to .agent folder
-cp AGENT.md SKILLS.md CODE_STANDARDS.md UI_STYLES.md .agent/
+npx vibe-coding-config init --lang en
 ```
 
-### Step 2: Tell the Agent to read these files
+### Option 2: Manual Copy
 
-At the start of your conversation with the Agent, include this:
-
-```
-Please read the configuration files in .agent/ folder first, then start working.
-```
-
-### Step 3: Start using
-
-Just chat with the Agent normally. It will automatically follow your rules.
+1. Download this folder
+2. Create an `.agent` folder in your project
+3. Copy all `.md` files into it
+4. Tell your AI: "Please read the .agent folder first"
 
 ---
 
-## File Structure
+## What's Inside
 
-| File | Audience | Purpose |
-|------|----------|---------|
-| **README.md** | Humans | Explains how to use these files (you're reading this) |
-| **AGENT.md** | AI Agent | Core system instructions: role, execution rules, token efficiency |
-| **SKILLS.md** | AI Agent | Specific skills: error handling, code generation templates |
-| **CODE_STANDARDS.md** | AI Agent | Coding standards: naming, structure, comments |
-| **EXAMPLES.md** | Humans + AI | Usage examples: how Agent should behave in typical scenarios |
-| **UI_STYLES.md** | AI Agent | Design system: colors, fonts, component styles (customizable) |
+| File | Purpose | When to read |
+|------|---------|--------------|
+| **AGENT.md** | AI's "work manual" | You don't need to - AI reads it |
+| **CODE_STANDARDS.md** | Code style rules | When customizing naming conventions |
+| **SKILLS.md** | AI's skill list | Curious what AI can do |
+| **EXAMPLES.md** | Usage examples | See how AI should respond |
+| **UI_STYLES.md** | Design system | For frontend projects |
+| **GIT_WORKFLOW.md** | Git rules | When using version control |
 
 ---
 
-## What You'll Get
+## Compatible AI Tools
 
-| Goal | Corresponding File | Effect |
-|------|-------------------|--------|
-| More maintainable code | CODE_STANDARDS.md | Agent follows consistent naming, structure, comment standards |
-| Auto error fixing | AGENT.md + SKILLS.md | Auto-diagnose and fix errors without you pointing them out |
-| Save tokens | AGENT.md | Concise output, no wasted explanations |
-| Self-sufficient problem solving | AGENT.md | Only asks you when truly necessary |
+Works with all major AI coding tools:
+
+| Tool | Company |
+|------|---------|
+| Claude Code | Anthropic |
+| Cursor | Anysphere |
+| Windsurf | Codeium |
+| GitHub Copilot | Microsoft |
+| Gemini CLI | Google |
+
+Use the `export` command to convert to different formats:
+
+```bash
+npx vibe-coding-config export --target cursor
+npx vibe-coding-config export --target copilot
+```
 
 ---
 
 ## FAQ
 
-### Q: Which AI Agents do these files work with?
+### Q: I don't know how to code. Can I still use this?
 
-Works with any Agent that supports system instructions:
+Yes. This kit is designed for non-technical users. Just copy the files to your project, and AI will read them.
 
-| Product | Company | Instruction File Format |
-|---------|---------|------------------------|
-| Claude Code | Anthropic | CLAUDE.md |
-| Cursor | Anysphere | .cursorrules |
-| Windsurf | Codeium | Custom rules |
-| Gemini CLI / Antigravity | Google | GEMINI.md |
-| Jules | Google | Custom rules |
-| GitHub Copilot | GitHub/Microsoft | .github/copilot-instructions.md |
+### Q: I use Cursor / Copilot. Will this work?
 
-> 💡 This kit provides universal instructions that work across all platforms. Just copy the content to the appropriate file format for your tool.
+Yes. Use `npx vibe-coding-config export --target cursor` to convert to the right format.
 
-### Q: Can I modify these files?
+### Q: How do I change the rules?
 
-Absolutely! These are just starting points. Adjust the rules to fit your needs.
+Just edit the `.md` files. They're plain text files that open in any editor.
 
-### Q: What if the Agent doesn't follow the rules?
+### Q: What if AI ignores the rules?
 
-1. Make sure you remind the Agent to read the files at the start
-2. For important rules, reinforce them in conversation
-3. Consider shortening the files, keeping only the most critical rules
+At the start of your conversation, remind it: "Please read the .agent folder first, then follow those rules."
+
+### Q: I still don't understand how to set this up?
+
+No problem! Just send this GitHub repository link to the AI you're using (Claude, ChatGPT, Gemini - any of them), and say:
+
+> "I want to use this config to help you write better code for me. Please guide me step by step on how to set it up."
+
+The AI will walk you through it.
 
 ---
 
-## Next Steps
+## Need Help?
 
-1. Read [AGENT.md](./AGENT.md) to understand core rules
-2. Read [EXAMPLES.md](./EXAMPLES.md) to see real usage scenarios
-3. Customize [CODE_STANDARDS.md](./CODE_STANDARDS.md) as needed
-4. Define your design style in [UI_STYLES.md](./UI_STYLES.md)
+- Questions or suggestions: [GitHub Issues](https://github.com/lumihelia/vibe-coding-agent-config/issues)
+- Want to contribute: PRs welcome
+
+---
+
+MIT License
