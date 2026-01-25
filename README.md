@@ -2,7 +2,7 @@
 
 **Make AI understand you better.**
 
-> 🌍 [简体中文](./zh-CN/README.md) | [繁體中文](./zh/README.md) | [English](./en/README.md)
+> 🌍 [简体中文](./zh-CN/README.md) | [繁體中文](./zh-TW/README.md) | [English](./en/README.md)
 
 ---
 
@@ -38,7 +38,7 @@ When using AI to write code, you may have experienced:
 | Language | Description | Get Started |
 |----------|-------------|-------------|
 | **简体中文** | Optimized for Mainland China | [开始使用 →](./zh-CN/README.md) |
-| **繁體中文** | For Taiwan, Hong Kong, Macau | [開始使用 →](./zh/README.md) |
+| **繁體中文** | For Taiwan, Hong Kong, Macau | [開始使用 →](./zh-TW/README.md) |
 | **English** | For English speakers | [Get Started →](./en/README.md) |
 
 ---
@@ -94,7 +94,7 @@ npx vibe-coding-config export --target copilot
 ## What's Inside?
 
 ```
-zh-CN/ (or zh/ or en/)
+zh-CN/ (or zh-TW/ or en/)
 ├── AGENT.md           # AI's work manual (you don't need to read it)
 ├── CODE_STANDARDS.md  # Coding standards
 ├── SKILLS.md          # What AI can do

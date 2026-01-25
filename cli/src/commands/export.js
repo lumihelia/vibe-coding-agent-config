@@ -50,12 +50,14 @@ export async function exportCommand(options) {
 
   const target = options.target.toLowerCase();
 
-  // Support zh (Traditional Chinese), zh-CN (Simplified Chinese), en (English)
-  let lang = 'zh';
+  // Support zh-TW (Traditional Chinese), zh-CN (Simplified Chinese), en (English)
+  let lang = 'zh-TW';
   if (options.lang === 'en') {
     lang = 'en';
   } else if (options.lang === 'zh-CN' || options.lang === 'zh-cn') {
     lang = 'zh-CN';
+  } else if (options.lang === 'zh-TW' || options.lang === 'zh-tw' || options.lang === 'zh') {
+    lang = 'zh-TW';
   }
 
   // Validate target
@@ -97,7 +99,7 @@ export async function exportCommand(options) {
     console.log('');
     console.log(chalk.cyan('Export details:'));
     console.log(chalk.white(`  Target: ${targetConfig.description}`));
-    const langLabels = { zh: 'Traditional Chinese', 'zh-CN': 'Simplified Chinese', en: 'English' };
+    const langLabels = { 'zh-TW': 'Traditional Chinese', 'zh-CN': 'Simplified Chinese', en: 'English' };
     console.log(chalk.white(`  Language: ${langLabels[lang]}`));
     console.log(chalk.white(`  Output: ${targetConfig.filename}`));
     console.log('');
@@ -114,7 +116,7 @@ export async function exportCommand(options) {
 function generateHeader(target, lang) {
   const timestamp = new Date().toISOString().split('T')[0];
 
-  if (lang === 'zh') {
+  if (lang === 'zh-TW') {
     return `# AI Agent 配置指令
 
 > 自動生成於 ${timestamp}

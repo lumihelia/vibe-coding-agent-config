@@ -16,7 +16,7 @@ program
 program
   .command('init')
   .description('Initialize .agent/ folder with configuration files')
-  .option('-l, --lang <language>', 'Language: zh (Traditional Chinese) or en (English)', 'zh')
+  .option('-l, --lang <language>', 'Language: zh-TW (Traditional Chinese), zh-CN (Simplified), or en (English)', 'zh-TW')
   .option('-f, --force', 'Overwrite existing files', false)
   .action(initCommand);
 
@@ -30,7 +30,7 @@ program
   .command('export')
   .description('Export configuration to different AI tool formats')
   .option('-t, --target <tool>', 'Target tool: cursor, copilot, windsurf, claude, gemini', 'cursor')
-  .option('-l, --lang <language>', 'Language: zh or en', 'zh')
+  .option('-l, --lang <language>', 'Language: zh-TW, zh-CN, or en', 'zh-TW')
   .action(exportCommand);
 
 program.parse();

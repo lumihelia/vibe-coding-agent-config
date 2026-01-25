@@ -19,12 +19,14 @@ const FILES = [
 export async function initCommand(options) {
   const spinner = ora('Initializing .agent/ folder...').start();
 
-  // Support zh (Traditional Chinese), zh-CN (Simplified Chinese), en (English)
-  let lang = 'zh';
+  // Support zh-TW (Traditional Chinese), zh-CN (Simplified Chinese), en (English)
+  let lang = 'zh-TW';
   if (options.lang === 'en') {
     lang = 'en';
   } else if (options.lang === 'zh-CN' || options.lang === 'zh-cn') {
     lang = 'zh-CN';
+  } else if (options.lang === 'zh-TW' || options.lang === 'zh-tw' || options.lang === 'zh') {
+    lang = 'zh-TW';
   }
   const targetDir = path.join(process.cwd(), '.agent');
   const templatesDir = path.join(__dirname, '..', '..', 'templates', lang);
