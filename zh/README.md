@@ -72,10 +72,16 @@ cp AGENT.md SKILLS.md CODE_STANDARDS.md UI_STYLES.md .agent/
 
 適用於所有支持系統指令的 Agent，包括：
 
-- Claude (Anthropic)
-- Gemini (Google)
-- ChatGPT (OpenAI)
-- Cursor / Windsurf / Copilot
+| 產品 | 公司 | 指令文件格式 |
+|------|------|-------------|
+| Claude Code | Anthropic | CLAUDE.md |
+| Cursor | Anysphere | .cursorrules |
+| Windsurf | Codeium | 自定義規則 |
+| Gemini CLI / Antigravity | Google | GEMINI.md |
+| Jules | Google | 自定義規則 |
+| GitHub Copilot | GitHub/Microsoft | .github/copilot-instructions.md |
+
+> 💡 本套件提供通用指令，適用於所有平台。只需複製內容到對應工具的文件格式即可。
 
 ### Q: 我可以修改這些文件嗎？
 

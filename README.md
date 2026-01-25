@@ -88,11 +88,16 @@ cp -r zh/*.md .agent/   # or en/*.md for English
 
 Works with any AI coding assistant that supports system instructions:
 
-- ✅ Claude (Anthropic) / Claude Code
-- ✅ Gemini (Google) / Gemini CLI
-- ✅ ChatGPT (OpenAI)
-- ✅ Cursor / Windsurf / Copilot
-- ✅ Any LLM-based coding tool
+| Product | Company | Instruction File Format |
+|---------|---------|------------------------|
+| **Claude Code** | Anthropic | CLAUDE.md |
+| **Cursor** | Anysphere | .cursorrules |
+| **Windsurf** | Codeium | Supports custom rules |
+| **Gemini CLI / Antigravity** | Google | GEMINI.md |
+| **Jules** | Google | Supports custom rules |
+| **GitHub Copilot** | GitHub/Microsoft | .github/copilot-instructions.md |
+
+> 💡 This kit provides universal instructions that work across all platforms. Just copy the content to the appropriate file format for your tool.
 
 ---
 

@@ -72,10 +72,16 @@ Just chat with the Agent normally. It will automatically follow your rules.
 
 Works with any Agent that supports system instructions:
 
-- Claude (Anthropic)
-- Gemini (Google)
-- ChatGPT (OpenAI)
-- Cursor / Windsurf / Copilot
+| Product | Company | Instruction File Format |
+|---------|---------|------------------------|
+| Claude Code | Anthropic | CLAUDE.md |
+| Cursor | Anysphere | .cursorrules |
+| Windsurf | Codeium | Custom rules |
+| Gemini CLI / Antigravity | Google | GEMINI.md |
+| Jules | Google | Custom rules |
+| GitHub Copilot | GitHub/Microsoft | .github/copilot-instructions.md |
+
+> 💡 This kit provides universal instructions that work across all platforms. Just copy the content to the appropriate file format for your tool.
 
 ### Q: Can I modify these files?
 
