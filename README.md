@@ -30,6 +30,8 @@ When using AI to write code, you may have experienced:
 | AI writes messy code | AI follows consistent coding standards |
 | AI over-explains everything | AI gives concise answers, no rambling |
 | Have to re-teach AI every time | Config files remember all the rules |
+| Permission prompts interrupt workflow | Pre-approved safe operations run without prompts |
+| AI doesn't know which model to use | Model selection guide matches task to cost |
 
 ---
 
@@ -62,11 +64,18 @@ npx vibe-coding-config init --lang en      # English
 npx vibe-coding-config init --lang zh-CN   # Simplified Chinese
 ```
 
-### Option 2: Manual Download
+### Option 2: Manual Setup (Claude Code)
 
-1. Click the green "Code" button above
-2. Select "Download ZIP"
-3. Extract and copy the files from your preferred language folder
+1. Copy `zh-CN/CLAUDE.md` (or your language) to your project root
+2. Create `.agent/` folder and copy the other `.md` files into it
+3. Copy `settings.json.example` to `.claude/settings.json` in your project
+4. Done — Claude Code reads `CLAUDE.md` automatically on next launch
+
+### Option 3: Manual Setup (Other AI tools)
+
+1. Create `.agent/` folder in your project
+2. Copy all `.md` files from your language folder into it
+3. Tell AI at the start of each conversation: "Please read `.agent/AGENT.md` first"
 
 ---
 
@@ -95,20 +104,23 @@ npx vibe-coding-config export --target copilot
 
 ```
 zh-CN/ (or zh-TW/ or en/)
-├── AGENT.md           # AI's work manual (you don't need to read it)
-├── CODE_STANDARDS.md  # Coding standards
-├── SKILLS.md          # What AI can do
-├── EXAMPLES.md        # Usage examples
-├── UI_STYLES.md       # UI design styles
-└── GIT_WORKFLOW.md    # Version control rules
+├── CLAUDE.md              # Claude Code native config (auto-loaded, copy to project root)
+├── AGENT.md               # Full instructions for Cursor / Copilot / other tools
+├── CODE_STANDARDS.md      # Coding standards
+├── SKILLS.md              # What AI can do
+├── EXAMPLES.md            # Usage examples
+├── UI_STYLES.md           # UI design styles
+├── GIT_WORKFLOW.md        # Version control rules
+├── MCP_GUIDE.md           # MCP plugin setup (browser, database, GitHub)
+└── settings.json.example  # Permissions template for Claude Code
 ```
 
 **Which files do you need to read?**
 
 - Most of the time: **None** — AI reads them automatically
-- Want to change rules: See `CODE_STANDARDS.md`
+- Want to change AI behavior: Edit `CLAUDE.md` (or `AGENT.md` for other tools)
+- Want AI to control a browser / database: See `MCP_GUIDE.md`
 - Frontend project: See `UI_STYLES.md`
-- Curious what AI can do: See `SKILLS.md`
 
 ---
 
@@ -116,7 +128,7 @@ zh-CN/ (or zh-TW/ or en/)
 
 **Q: I don't know how to code at all. Can I really use this?**
 
-Yes. Put the files in your project, tell AI "please read the .agent folder first", and you're good to go.
+Yes. If you use Claude Code, just copy `CLAUDE.md` to your project root — Claude reads it automatically every conversation. No setup beyond that.
 
 **Q: Is it free?**
 

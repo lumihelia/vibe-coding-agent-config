@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git log*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git stash*)",
+      "Bash(npm install*)",
+      "Bash(npm run*)",
+      "Bash(npx*)",
+      "Bash(pip install*)",
+      "Bash(pip show*)",
+      "Bash(python*)",
+      "Bash(python3*)",
+      "Bash(node*)",
+      "Bash(ls*)",
+      "Bash(find*)",
+      "Bash(mkdir*)",
+      "Bash(touch*)",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf*)",
+      "Bash(sudo rm*)",
+      "Bash(chmod 777*)"
+    ]
+  },
+  "mcpServers": {
+  }
+}
