@@ -8,7 +8,7 @@ outputs: [configuration-file, claude-md]
 scenarios: [project-setup, onboarding]
 runtimes: [chat]
 platforms: [claude-code, cursor, windsurf]
-tags: [vibe-coding, agent-config, beginners, setup, hackathon]
+tags: [vibe-coding, agent-config, beginners, setup]
 version: 1.0.0
 author: Helia
 ---
