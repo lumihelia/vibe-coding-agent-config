@@ -1,108 +1,67 @@
-# Vibe Coding Agent Config Guide
+# Vibe Coding Agent Config Guide — English Templates
 
-> Instructions to help AI write better code for you
+This directory contains the current English **portable `.agent/` template set**.
 
----
+It does not yet include the newer Claude-specific files that were later added to `zh-CN/`, such as `CLAUDE.md`, `MCP_GUIDE.md`, or `settings.json.example`.
 
-## What is this?
+## Included files
 
-When you use AI tools (like Claude, Cursor, Copilot) to write code, AI sometimes:
+| File | Purpose |
+|---|---|
+| `AGENT.md` | Main portable agent instructions |
+| `CODE_STANDARDS.md` | Naming, structure, and error-handling rules |
+| `SKILLS.md` | Agent capabilities and working procedures |
+| `EXAMPLES.md` | Behavior and output examples |
+| `UI_STYLES.md` | Frontend and interface conventions |
+| `GIT_WORKFLOW.md` | Git workflow and operation boundaries |
 
-- Asks too many questions
-- Writes inconsistent code
-- Over-explains things you don't need
-- Doesn't know how to recover from errors
+## Portable setup
 
-**This config kit solves these problems.**
+A typical project layout looks like this:
 
-Put these files in your project, and AI will follow your rules.
-
----
-
-## Quick Start
-
-### Option 1: One Command (Recommended)
-
-```bash
-npx vibe-coding-config init --lang en
+```text
+project/
+└── .agent/
+    ├── AGENT.md
+    ├── CODE_STANDARDS.md
+    ├── SKILLS.md
+    ├── EXAMPLES.md
+    ├── UI_STYLES.md
+    └── GIT_WORKFLOW.md
 ```
 
-### Option 2: Manual Copy
+Copy the relevant files into `.agent/`. Tools that do not automatically discover `.agent/AGENT.md` may require an explicit instruction to read it at the start of a session.
 
-1. Download this folder
-2. Create an `.agent` folder in your project
-3. Copy all `.md` files into it
-4. Tell your AI: "Please read the .agent folder first"
+## CLI
 
----
+The repository CLI can initialize the same six-file portable set or merge the rules into tool-specific files.
 
-## What's Inside
-
-| File | Purpose | When to read |
-|------|---------|--------------|
-| **AGENT.md** | AI's "work manual" | You don't need to - AI reads it |
-| **CODE_STANDARDS.md** | Code style rules | When customizing naming conventions |
-| **SKILLS.md** | AI's skill list | Curious what AI can do |
-| **EXAMPLES.md** | Usage examples | See how AI should respond |
-| **UI_STYLES.md** | Design system | For frontend projects |
-| **GIT_WORKFLOW.md** | Git rules | When using version control |
-
----
-
-## Compatible AI Tools
-
-Works with all major AI coding tools:
-
-| Tool | Company |
-|------|---------|
-| Claude Code | Anthropic |
-| Cursor | Anysphere |
-| Windsurf | Codeium |
-| GitHub Copilot | Microsoft |
-| Gemini CLI | Google |
-
-Use the `export` command to convert to different formats:
+After installing the CLI from the repository source, examples include:
 
 ```bash
-npx vibe-coding-config export --target cursor
-npx vibe-coding-config export --target copilot
+vibe init --lang en
+vibe export --target cursor --lang en
+vibe export --target copilot --lang en
+vibe export --target windsurf --lang en
+vibe export --target claude --lang en
+vibe export --target gemini --lang en
 ```
 
----
+See [`../cli/README.md`](../cli/README.md) for the exact current commands and limitations.
 
-## FAQ
+## Claude Code-specific configuration
 
-### Q: I don't know how to code. Can I still use this?
+Two current paths cover Claude Code-specific setup:
 
-Yes. This kit is designed for non-technical users. Just copy the files to your project, and AI will read them.
+- [`../SKILL.md`](../SKILL.md) can generate a customized `CLAUDE.md`, permissions file, and optional MCP guidance through conversation.
+- [`../zh-CN/`](../zh-CN/) contains the most recently expanded static template set, currently written in Simplified Chinese.
 
-### Q: I use Cursor / Copilot. Will this work?
+The English static directory has not yet been brought to feature parity with that newer structure.
 
-Yes. Use `npx vibe-coding-config export --target cursor` to convert to the right format.
+## Issues and contributions
 
-### Q: How do I change the rules?
+Questions and suggestions can be filed through [GitHub Issues](https://github.com/lumihelia/vibe-coding-agent-config/issues). Code and documentation changes are welcome through Pull Requests.
 
-Just edit the `.md` files. They're plain text files that open in any editor.
+## License
 
-### Q: What if AI ignores the rules?
-
-At the start of your conversation, remind it: "Please read the .agent folder first, then follow those rules."
-
-### Q: I still don't understand how to set this up?
-
-No problem! Just send this GitHub repository link to the AI you're using (Claude, ChatGPT, Gemini - any of them), and say:
-
-> "I want to use this config to help you write better code for me. Please guide me step by step on how to set it up."
-
-The AI will walk you through it.
-
----
-
-## Need Help?
-
-- Questions or suggestions: [GitHub Issues](https://github.com/lumihelia/vibe-coding-agent-config/issues)
-- Want to contribute: PRs welcome
-
----
-
-MIT License
+MIT License.
