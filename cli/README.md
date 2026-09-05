@@ -1,128 +1,114 @@
 # Vibe Coding Config CLI
 
-> One command to set up AI agent configuration files
+CLI source for installing, checking, and exporting the repository's portable AI agent configuration files.
 
-## Installation
+## Run from this repository
+
+The CLI package lives in `cli/` and requires Node.js 18 or newer.
 
 ```bash
-# Install globally
-npm install -g vibe-coding-config
-
-# Or use npx (no install needed)
-npx vibe-coding-config init
+cd cli
+npm install
+npm link
+vibe --help
 ```
 
-## Commands
+`package.json` also registers `vibe-coding-config` as a binary name, so either binary can point to the same CLI after a local link/install.
 
-### `vibe init`
+## `vibe init`
 
-Initialize `.agent/` folder with configuration files.
+Creates a six-file `.agent/` directory.
 
 ```bash
-# Default: Traditional Chinese
-vibe init
-
-# Simplified Chinese
+vibe init                    # default: Traditional Chinese
+vibe init --lang zh-TW
 vibe init --lang zh-CN
-
-# English version
 vibe init --lang en
-
-# Overwrite existing files
-vibe init --force
+vibe init --force            # overwrite an existing .agent/ directory
 ```
 
-**Result:**
-```
+Generated structure:
+
+```text
 .agent/
-├── AGENT.md           # Core system instructions
-├── SKILLS.md          # Agent skills and procedures
-├── CODE_STANDARDS.md  # Naming, structure, comments
-├── EXAMPLES.md        # Do's and don'ts examples
-├── UI_STYLES.md       # Design system template
-└── GIT_WORKFLOW.md    # Git rules and conventions
+├── AGENT.md
+├── SKILLS.md
+├── CODE_STANDARDS.md
+├── EXAMPLES.md
+├── UI_STYLES.md
+└── GIT_WORKFLOW.md
 ```
 
-### `vibe check [path]`
+### Current limitation
 
-Check your code against CODE_STANDARDS.md rules.
+`init` reflects the portable six-file model. It does not currently copy the newer Simplified Chinese Claude-specific files:
+
+- `zh-CN/CLAUDE.md`
+- `zh-CN/MCP_GUIDE.md`
+- `zh-CN/settings.json.example`
+
+Those files require manual setup at the moment.
+
+## `vibe export`
+
+Merges four portable rule files (`AGENT.md`, `CODE_STANDARDS.md`, `UI_STYLES.md`, and `GIT_WORKFLOW.md`) into one tool-specific output file.
 
 ```bash
-# Check current directory
+vibe export --target cursor --lang en
+vibe export --target copilot --lang zh-CN
+vibe export --target windsurf --lang zh-TW
+vibe export --target claude --lang zh-CN
+vibe export --target gemini --lang en
+```
+
+Supported targets:
+
+| Target | Output file |
+|---|---|
+| `cursor` | `.cursorrules` |
+| `copilot` | `.github/copilot-instructions.md` |
+| `windsurf` | `.windsurfrules` |
+| `claude` | `CLAUDE.md` |
+| `gemini` | `GEMINI.md` |
+
+The export path is separate from the hand-written `zh-CN/CLAUDE.md`: `export --target claude` generates a merged file from the portable rule set rather than copying the newer Claude-specific template.
+
+## `vibe check [path]`
+
+Runs a lightweight static scan over JavaScript, TypeScript, JSX, TSX, and Python files.
+
+```bash
 vibe check
-
-# Check specific path
 vibe check src/
-
-# Check a single file
 vibe check src/api.js
 ```
 
-**What it checks:**
-- File naming conventions (snake_case, kebab-case, PascalCase)
-- Hardcoded secrets (API keys, passwords)
-- Magic numbers in conditions
-- Missing HTTP timeouts (Python)
-- console.log statements
+Current checks include:
+
+- Python file naming (`snake_case`)
+- JavaScript / TypeScript file naming (`kebab-case`, with component exceptions)
+- React component naming (`PascalCase`)
+- possible hardcoded secrets
+- magic numbers in conditions
+- Python HTTP requests without an explicit timeout
+- `console.log` / `console.debug`
 - TODO comments
-- Direct env access without fallback
+- direct `process.env` access without a fallback
 
-### `vibe export`
+The CLI accepts `--fix`, but the current implementation only reports issues; automatic fixes are not implemented yet.
 
-Export configuration to different AI tool formats.
+## Language behavior
 
-```bash
-# Export to Cursor
-vibe export --target cursor
+Both `init` and `export` support:
 
-# Export to GitHub Copilot
-vibe export --target copilot
+- `zh-TW` — Traditional Chinese, current default
+- `zh-CN` — Simplified Chinese
+- `en` — English
 
-# Export to Claude Code
-vibe export --target claude
+## Implementation notes
 
-# With English
-vibe export --target cursor --lang en
-```
-
-**Supported targets:**
-| Target | Output File | Tool |
-|--------|-------------|------|
-| `cursor` | `.cursorrules` | Cursor AI |
-| `copilot` | `.github/copilot-instructions.md` | GitHub Copilot |
-| `windsurf` | `.windsurfrules` | Windsurf |
-| `claude` | `CLAUDE.md` | Claude Code |
-| `gemini` | `GEMINI.md` | Gemini CLI |
-
-## Quick Start
-
-```bash
-# 1. Go to your project
-cd my-project
-
-# 2. Initialize config files
-npx vibe-coding-config init
-
-# 3. Tell your AI agent
-# "Please read .agent/ folder first before starting work."
-
-# 4. (Optional) Check your code
-npx vibe-coding-config check src/
-
-# 5. (Optional) Export to your AI tool format
-npx vibe-coding-config export --target cursor
-```
-
-## Options
-
-| Command | Option | Description |
-|---------|--------|-------------|
-| `init` | `-l, --lang <lang>` | Language: `zh` (default), `zh-CN`, or `en` |
-| `init` | `-f, --force` | Overwrite existing files |
-| `check` | `-f, --fix` | Auto-fix simple issues (coming soon) |
-| `export` | `-t, --target <tool>` | Target tool (see table above) |
-| `export` | `-l, --lang <lang>` | Language: `zh` (default), `zh-CN`, or `en` |
+The CLI is intentionally separate from the repository-level [`../SKILL.md`](../SKILL.md). The CLI installs or merges static templates; the Skill gathers project context and generates customized Claude Code configuration conversationally.
 
 ## License
 
-MIT
+MIT License.

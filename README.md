@@ -1,163 +1,97 @@
 # Vibe Coding Agent Config Kit
 
-**Make AI understand you better.**
+中文 · [English](./README.en.md)
 
-> 🌍 [简体中文](./zh-CN/README.md) | [繁體中文](./zh-TW/README.md) | [English](./en/README.md)
+一套用于稳定 AI coding agent 项目行为的配置工具。仓库目前包含可复用的项目配置模板、用于安装和转换 portable `.agent/` 规则的 CLI，以及一份可以通过对话生成定制 Claude Code 配置的独立 Skill。
 
----
+## 仓库现在包含什么
 
-## You Don't Need to Know How to Code
+### 1. 项目配置模板
 
-This toolkit is for **people who use AI to write code**.
+仓库保留了三套语言目录，目前**并不处在同一个功能版本**。
 
-Whether you're:
+| 目录 | 当前状态 |
+|---|---|
+| [`zh-CN/`](./zh-CN/) | 最近扩展过的模板集：包含 `CLAUDE.md`、`AGENT.md`、代码规范、Git 工作流、UI 规则、MCP 指南和 Claude Code 权限示例 |
+| [`en/`](./en/) | Portable 六文件 `.agent/` 配置集 |
+| [`zh-TW/`](./zh-TW/) | Portable 六文件 `.agent/` 配置集 |
 
-- A founder using AI to build your first product
-- A designer wanting AI to help with projects
-- Just someone curious and wanting to try
+`zh-CN/` 后来新增的 Claude 专用文件目前还没有同步到 `en/` 和 `zh-TW/`。这里直接保留这层差异，让文档对应仓库真实存在的状态。
 
-**You can use this.**
+### 2. CLI
 
----
+[`cli/`](./cli/) 保存 JavaScript CLI 源码。
 
-## What Problems Does It Solve?
+`init` 当前会在 `.agent/` 中生成六个 portable 配置文件：
 
-When using AI to write code, you may have experienced:
-
-| Problem | After Using This Config |
-|---------|------------------------|
-| AI asks too many questions | AI makes decisions, solves small issues itself |
-| AI writes messy code | AI follows consistent coding standards |
-| AI over-explains everything | AI gives concise answers, no rambling |
-| Have to re-teach AI every time | Config files remember all the rules |
-| Permission prompts interrupt workflow | Pre-approved safe operations run without prompts |
-| AI doesn't know which model to use | Model selection guide matches task to cost |
-
----
-
-## Choose Your Language
-
-| Language | Description | Get Started |
-|----------|-------------|-------------|
-| **简体中文** | Optimized for Mainland China | [开始使用 →](./zh-CN/README.md) |
-| **繁體中文** | For Taiwan, Hong Kong, Macau | [開始使用 →](./zh-TW/README.md) |
-| **English** | For English speakers | [Get Started →](./en/README.md) |
-
----
-
-## Quick Start
-
-### Option 1: One Command (Recommended)
-
-Open your terminal and run:
-
-```bash
-npx vibe-coding-config init
+```text
+.agent/
+├── AGENT.md
+├── SKILLS.md
+├── CODE_STANDARDS.md
+├── EXAMPLES.md
+├── UI_STYLES.md
+└── GIT_WORKFLOW.md
 ```
 
-That's it. Config files will be copied to your project automatically.
+CLI 默认使用繁体中文，也支持简体中文和英文。当前 `init` **不会**自动安装后来加入 `zh-CN/` 的 `CLAUDE.md`、`MCP_GUIDE.md` 和 `settings.json.example`。
 
-**Other languages:**
+`export` 可以把 portable 规则合并成 Cursor、GitHub Copilot、Windsurf、Claude Code 或 Gemini CLI 对应的单一配置文件；`check` 提供轻量的规则扫描。
 
-```bash
-npx vibe-coding-config init --lang en      # English
-npx vibe-coding-config init --lang zh-CN   # Simplified Chinese
+具体命令以 [`cli/README.md`](./cli/README.md) 为准。
+
+### 3. `SKILL.md`
+
+根目录的 [`SKILL.md`](./SKILL.md) 是一份带 BotLearn-style metadata 的 Vibe Agent Starter Skill。它通过一轮项目信息收集，继续生成定制的 `CLAUDE.md`、Claude Code 权限配置，并在需要时提供 MCP 设置建议。
+
+这条路径和静态模板承担不同作用：模板提供可复用默认值，Skill 根据具体项目动态生成配置。
+
+## 怎么选
+
+| 目标 | 路径 |
+|---|---|
+| 使用当前扩展最完整的 Claude Code 模板 | 从 [`zh-CN/`](./zh-CN/) 开始 |
+| 使用 portable `.agent/` 规则 | 选择语言目录，或使用 CLI |
+| 为具体项目生成一份定制 Claude Code 配置 | 在兼容的 Skill runtime 中使用 [`SKILL.md`](./SKILL.md) |
+| 把 portable 规则转换成特定工具格式 | 使用 `cli export` |
+
+## 简体中文 / Claude Code 配置方式
+
+当前 `zh-CN/` 支持 Claude Code-first 的项目结构：
+
+1. 将 `zh-CN/CLAUDE.md` 复制到项目根目录，命名为 `CLAUDE.md`。
+2. 创建 `.agent/`，再复制项目实际需要的辅助规则文件。
+3. 权限默认值合适时，将 `zh-CN/settings.json.example` 复制为 `.claude/settings.json`。
+4. 需要增加外部工具时，以 `zh-CN/MCP_GUIDE.md` 作为参考。
+
+这些文件都是普通 Markdown / JSON，可以随着项目要求继续修改。
+
+## Portable `.agent/` 配置方式
+
+Portable 模型把规则集中在 `.agent/` 目录中，以 `AGENT.md` 作为主要入口，再把代码规范、Git 行为、UI 约定、技能和示例拆进独立文件。
+
+部分 AI coding 工具不会自动发现 `.agent/AGENT.md`，这类工具需要在会话开始时显式要求读取该文件。
+
+## 仓库结构
+
+```text
+.
+├── README.md              # 中文仓库入口
+├── README.en.md           # English repository overview
+├── SKILL.md               # 对话式配置生成器
+├── zh-CN/                 # 最近扩展过的简体中文模板集
+├── en/                    # 英文 portable 模板集
+├── zh-TW/                 # 繁体中文 portable 模板集
+├── cli/                   # CLI 源码与模板
+└── .claude/               # Claude Code Skill 集成
 ```
 
-### Option 2: Manual Setup (Claude Code)
+## 当前状态
 
-1. Copy `zh-CN/CLAUDE.md` (or your language) to your project root
-2. Create `.agent/` folder and copy the other `.md` files into it
-3. Copy `settings.json.example` to `.claude/settings.json` in your project
-4. Done — Claude Code reads `CLAUDE.md` automatically on next launch
+这个仓库仍在演进。三套语言模板目前没有完全同步，CLI 也仍然沿用较早的 portable 六文件模型。文档会直接记录这些差异，让公开入口持续对应真实实现。
 
-### Option 3: Manual Setup (Other AI tools)
+欢迎通过 Issues 和 Pull Requests 补充模板、CLI 或文档，也欢迎继续推动不同语言版本之间的同步。
 
-1. Create `.agent/` folder in your project
-2. Copy all `.md` files from your language folder into it
-3. Tell AI at the start of each conversation: "Please read `.agent/AGENT.md` first"
+## License
 
----
-
-## Compatible AI Tools
-
-Works with all major AI coding tools:
-
-| Tool | Company |
-|------|---------|
-| Claude Code | Anthropic |
-| Cursor | Anysphere |
-| Windsurf | Codeium |
-| GitHub Copilot | Microsoft |
-| Gemini CLI | Google |
-
-Use the `export` command to convert to different formats:
-
-```bash
-npx vibe-coding-config export --target cursor
-npx vibe-coding-config export --target copilot
-```
-
----
-
-## What's Inside?
-
-```
-zh-CN/ (or zh-TW/ or en/)
-├── CLAUDE.md              # Claude Code native config (auto-loaded, copy to project root)
-├── AGENT.md               # Full instructions for Cursor / Copilot / other tools
-├── CODE_STANDARDS.md      # Coding standards
-├── SKILLS.md              # What AI can do
-├── EXAMPLES.md            # Usage examples
-├── UI_STYLES.md           # UI design styles
-├── GIT_WORKFLOW.md        # Version control rules
-├── MCP_GUIDE.md           # MCP plugin setup (browser, database, GitHub)
-└── settings.json.example  # Permissions template for Claude Code
-```
-
-**Which files do you need to read?**
-
-- Most of the time: **None** — AI reads them automatically
-- Want to change AI behavior: Edit `CLAUDE.md` (or `AGENT.md` for other tools)
-- Want AI to control a browser / database: See `MCP_GUIDE.md`
-- Frontend project: See `UI_STYLES.md`
-
----
-
-## FAQ
-
-**Q: I don't know how to code at all. Can I really use this?**
-
-Yes. If you use Claude Code, just copy `CLAUDE.md` to your project root — Claude reads it automatically every conversation. No setup beyond that.
-
-**Q: Is it free?**
-
-Completely free, MIT open source license.
-
-**Q: What if I run into problems?**
-
-[Open an Issue](https://github.com/lumihelia/vibe-coding-agent-config/issues), and I'll do my best to help.
-
-**Q: What if I still don't understand after reading?**
-
-No problem! Just send this repository link to the AI you're using (Claude, ChatGPT, Gemini — any of them), and say:
-
-> "I want to use this config to help you write better code for me. Please guide me step by step on how to set it up."
-
-The AI will walk you through it.
-
----
-
-## About This Project
-
-This config kit is designed for **people without a technical background who want to use AI to write code**.
-
-I started from knowing almost nothing about code myself. The first time I saw a screen full of technical documentation (configuring terminal for Claude Code), that feeling of "eyes glazing over, wanting to cry from frustration"... I get it.
-
-So I wanted to make something truly beginner-friendly.
-
-I hope it helps you too.
-
----
-
-MIT License | Made by [lumihelia](https://github.com/lumihelia)
+MIT License，见 [`LICENSE`](./LICENSE)。
