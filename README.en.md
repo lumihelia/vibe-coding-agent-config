@@ -36,7 +36,7 @@ The newer Claude-specific files added to `zh-CN/` have not yet been mirrored int
 
 The CLI currently defaults to Traditional Chinese and also supports Simplified Chinese and English. It does **not** install the newer `zh-CN/CLAUDE.md`, `MCP_GUIDE.md`, or `settings.json.example` files.
 
-`export` can merge the portable rules into tool-specific files for Cursor, GitHub Copilot, Windsurf, Claude Code, and Gemini CLI. `check` runs a lightweight rule-based scan against code files.
+`export` reads four rule files from **the CLI’s bundled `cli/templates/<lang>/`**, then merges them into a tool-specific file for Cursor, GitHub Copilot, Windsurf, Claude Code, or Gemini CLI. It does not read a project’s customized `.agent/` directory. Output is written to the current working directory and directly overwrites a matching file (including `CLAUDE.md`), without confirmation or a `--force` safeguard. Back up existing configuration, or generate in a new empty directory and review/merge manually. `check` runs a lightweight rule-based scan against code files.
 
 See [`cli/README.md`](./cli/README.md) for the exact current commands.
 
@@ -53,7 +53,7 @@ This is separate from the static language templates: the templates provide reusa
 | Use the most recently expanded Claude Code template | Start with [`zh-CN/`](./zh-CN/) |
 | Use a portable `.agent/` rule set | Use one of the language directories or the CLI |
 | Generate a project-specific Claude Code configuration | Use [`SKILL.md`](./SKILL.md) in a compatible skill runtime |
-| Convert the portable rules to a tool-specific file | Use `cli export` |
+| Generate a tool-specific file from bundled CLI templates | Use `vibe export`; customized `.agent/` is not read and matching output files are overwritten |
 
 ## Simplified Chinese / Claude Code setup
 

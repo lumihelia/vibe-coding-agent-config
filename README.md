@@ -36,7 +36,7 @@
 
 CLI 默认使用繁体中文，也支持简体中文和英文。当前 `init` **不会**自动安装后来加入 `zh-CN/` 的 `CLAUDE.md`、`MCP_GUIDE.md` 和 `settings.json.example`。
 
-`export` 可以把 portable 规则合并成 Cursor、GitHub Copilot、Windsurf、Claude Code 或 Gemini CLI 对应的单一配置文件；`check` 提供轻量的规则扫描。
+`export` 从 **CLI 内置的 `cli/templates/<lang>/`** 读取四份规则，合并成 Cursor、GitHub Copilot、Windsurf、Claude Code 或 Gemini CLI 对应的单一配置文件；它不读取项目中已定制的 `.agent/`。输出写到当前工作目录，并直接覆盖同名文件（包括 `CLAUDE.md`），没有覆盖确认或 `--force` 保护。使用前备份已有配置，或在新的空目录生成后审查、手动合并。`check` 提供轻量的规则扫描。
 
 具体命令以 [`cli/README.md`](./cli/README.md) 为准。
 
@@ -53,7 +53,7 @@ CLI 默认使用繁体中文，也支持简体中文和英文。当前 `init` **
 | 使用当前扩展最完整的 Claude Code 模板 | 从 [`zh-CN/`](./zh-CN/) 开始 |
 | 使用 portable `.agent/` 规则 | 选择语言目录，或使用 CLI |
 | 为具体项目生成一份定制 Claude Code 配置 | 在兼容的 Skill runtime 中使用 [`SKILL.md`](./SKILL.md) |
-| 把 portable 规则转换成特定工具格式 | 使用 `cli export` |
+| 从 CLI 内置模板生成特定工具格式 | 使用 `vibe export`；不读取定制 `.agent/`，会覆盖同名文件 |
 
 ## 简体中文 / Claude Code 配置方式
 
