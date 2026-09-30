@@ -47,11 +47,13 @@ Generated structure:
 - `zh-CN/MCP_GUIDE.md`
 - `zh-CN/settings.json.example`
 
-Those files require manual setup at the moment.
+Those files require manual setup at the moment. In addition, the root `zh-CN/AGENT.md` and `zh-CN/SKILLS.md` currently differ from their same-named bundled `cli/templates/zh-CN/` versions. Choosing the root templates and using the CLI are not interchangeable ways to obtain the latest Simplified Chinese content.
 
 ## `vibe export`
 
-Merges four portable rule files (`AGENT.md`, `CODE_STANDARDS.md`, `UI_STYLES.md`, and `GIT_WORKFLOW.md`) into one tool-specific output file.
+Merges four portable rule files (`AGENT.md`, `CODE_STANDARDS.md`, `UI_STYLES.md`, and `GIT_WORKFLOW.md`) from the CLI’s bundled `cli/templates/<lang>/` directory into one tool-specific output file. It does **not** read your current project’s `.agent/` files, so edits made there are not included.
+
+**Overwrite warning:** output is written under the current working directory with `writeFileSync`. Existing files with the same name are replaced without a prompt or a `--force` option. Back up any existing configuration first, or run these examples in a new empty directory, then review and manually merge the result into your project. In particular, `--target claude` can overwrite a hand-written `CLAUDE.md`.
 
 ```bash
 vibe export --target cursor --lang en
